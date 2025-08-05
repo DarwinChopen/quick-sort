@@ -9,7 +9,7 @@ def quick_sort(lista):
 
     return quick_sort(menores) + iguales + quick_sort(mayores)
 
-
+estudiantes={}
 nombres = []
 numeros = [6, 3, 9, 2]
 resultado = quick_sort(numeros)
@@ -54,15 +54,16 @@ while True:
         print("Ingrese un entero")
     match opcion:
         case 1:
-            estudiantes = {}
             cantidad = int(input("¿Cuántos estudiantes desea ingresar? "))
-
             for i in range(cantidad):
                 print(f"\nEstudiante #{i + 1}")
-
-                carnet = input("Ingrese el número de carnet: ")
+                while True:
+                   carnet = input(int("Ingrese el número de carnet: "))
+                   if carnet in estudiantes:
+                       print("Este carnet ya existe Ingrese otro")
+                   else:
+                       break
                 estudiantes[carnet] = {}
-
                 estudiantes[carnet]["nombre"] = input("Ingrese el nombre: ")
                 estudiantes[carnet]["edad"] = int(input("Ingrese la edad: "))
                 estudiantes[carnet]["carrera"] = input("Ingrese la carrera: ")
@@ -87,7 +88,12 @@ while True:
                     }
         case 2:
             print("\nLista de estudiantes registrados:")
-            for carnet, datos in estudiantes.items():
+            carnets=list(estudiantes.keys())
+            ordenarDiccionarios=quick_sort(carnets)
+
+            #for carnet, datos in estudiantes.items():
+            for carnet in ordenarDiccionarios:
+                datos=estudiantes[carnet]
                 print(f"\nCarnet: {carnet}")
                 print(f"Nombre: {datos['nombre']}")
                 print(f"Edad: {datos['edad']}")
